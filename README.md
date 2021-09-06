@@ -3,6 +3,13 @@
 ## Contact：[X1a0He](https://t.me/X1a0He)
 
 # Fixlog
+ - 2021-09-06 14:20 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+ ```
+ 更改tabId的类型为数组
+ 增加种草官过滤规则
+ 增加是否输出到日志
+ 修复当maxLength过大的时候，会出现自动停止的问题
+```
 
 # ToDo
 - [ ] 取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1)
