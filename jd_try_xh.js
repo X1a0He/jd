@@ -45,7 +45,7 @@ let args_xh = {
      * */
     tabId: process.env.JD_TRY_TABID && process.env.JD_TRY_TABID.split('@').map(Number) || [1, 2, 3, 4, 5],
     /*
-     * 试用商品标题过滤
+     * 试用商品标题过滤，黑名单，当标题存在关键词时，则不加入试用组
      * 可设置环境变量：JD_TRY_TITLEFILTERS，关键词与关键词之间用@分隔
      * */
     titleFilters: process.env.JD_TRY_TITLEFILTERS && process.env.JD_TRY_TITLEFILTERS.split('@') || ["幼儿园", "教程", "英语", "辅导", "培训", "孩子", "小学"],
@@ -98,7 +98,17 @@ let args_xh = {
      * 不打印的缺点：无法清晰知道每个商品为什么会被过滤，哪个商品被添加到了待提交试用组
      * 可设置环境变量：JD_TRY_PLOG，默认为true
      * */
-    printLog: process.env.JD_TRY_PLOG || true
+    printLog: process.env.JD_TRY_PLOG || true,
+    /*
+     * 白名单
+     * 可通过环境变量控制：JD_TRY_WHITELIST，默认为false
+     * */
+    whiteList: process.env.JD_TRY_WHITELIST || false,
+    /*
+     * 白名单关键词，当标题存在关键词时，加入到试用组
+     * 可通过环境变量控制：JD_TRY_WHITELIST，用@分隔
+     * */
+    whiteListKeywords: process.env.JD_TRY_WHITELIST && process.env.JD_TRY_WHITELIST.split('@') || [],
 }
 //上面很重要，遇到问题请把上面注释看一遍再来问
 !(async() => {
@@ -144,21 +154,26 @@ let args_xh = {
                 // await try_tabList();
                 // return;
                 while(trialActivityIdList.length < args_xh.maxLength){
-                    await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage++)  //获取对应tabId的试用页面
+                    if($.nowTabIdIndex > args_xh.tabId.length){
+                        console.log('不再获取商品，边缘越界');
+                        break;
+                    } else {
+                        await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage++)  //获取对应tabId的试用页面
+                    }
                     if(trialActivityIdList.length < args_xh.maxLength){
-                        console.log(`间隔延时中，请等待 ${args_xh.applyInterval} ms\n`)
-                        await $.wait(args_xh.applyInterval);
+                        console.log(`间隔等待中，请等待 1 秒\n`)
+                        await $.wait(1000);
                     }
                 }
-                console.log(`稍后将执行试用申请，请等待 ${args_xh.applyInterval} ms\n`)
-                await $.wait(args_xh.applyInterval);
+                console.log(`稍后将执行试用申请，请等待 2 秒\n`)
+                await $.wait(2000);
                 for(let i = 0; i < trialActivityIdList.length && $.isLimit === false; i++){
                     if($.isLimit){
                         console.log("试用上限")
                         break
                     }
                     await try_apply(trialActivityTitleList[i], trialActivityIdList[i])
-                    console.log(`间隔延时中，请等待 ${args_xh.applyInterval} ms\n`)
+                    console.log(`间隔等待中，请等待 ${args_xh.applyInterval} ms\n`)
                     await $.wait(args_xh.applyInterval);
                 }
                 console.log("试用申请执行完毕...")
@@ -195,8 +210,12 @@ function requireConfig(){
             //IOS等用户直接用NobyDa的jd $.cookie
             $.cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
         }
-        args_xh.passZhongCao = process.env.JD_TRY_PASSZC === 'true';
-        args_xh.printLog = process.env.JD_TRY_PLOG === 'true';
+        if(typeof process.env.JD_TRY_WHITELIST === "undefined") args_xh.whiteList = false;
+        else args_xh.whiteList = process.env.JD_TRY_WHITELIST === 'true';
+        if(typeof process.env.JD_TRY_PLOG === "undefined") args_xh.printLog = true;
+        else args_xh.printLog = process.env.JD_TRY_PLOG === 'true';
+        if(typeof process.env.JD_TRY_PASSZC === "undefined") args_xh.passZhongCao = true;
+        else args_xh.passZhongCao = process.env.JD_TRY_PASSZC === 'true';
         console.log(`共${$.cookiesArr.length}个京东账号\n`)
         console.log('=====环境变量配置如下=====')
         console.log(`jdPrice: ${typeof args_xh.jdPrice}, ${args_xh.jdPrice}`)
@@ -209,6 +228,8 @@ function requireConfig(){
         console.log(`maxLength: ${typeof args_xh.maxLength}, ${args_xh.maxLength}`)
         console.log(`passZhongCao: ${typeof args_xh.passZhongCao}, ${args_xh.passZhongCao}`)
         console.log(`printLog: ${typeof args_xh.printLog}, ${args_xh.printLog}`)
+        console.log(`whiteList: ${typeof args_xh.whiteList}, ${args_xh.whiteList}`)
+        console.log(`whiteListKeywords: ${typeof args_xh.whiteListKeywords}, ${args_xh.whiteListKeywords}`)
         console.log('=======================')
         // for(const key in args_xh){
         //     if(typeof args_xh[key] == 'string'){
@@ -255,6 +276,9 @@ function try_feedsList(tabId, page){
         if(page > $.totalPages){
             console.log("请求页数错误")
             return;
+        } else if($.nowTabIdIndex > args_xh.tabId.length){
+            console.log(`不再获取商品，边缘越界，提交试用中...`)
+            return;
         }
         const body = JSON.stringify({
             "tabId": `${tabId}`,
@@ -270,7 +294,11 @@ function try_feedsList(tabId, page){
                     data = JSON.parse(data)
                     if(data.success){
                         $.totalPages = data.data.pages
-                        console.log(`第 ${size++} 次获取试用商品成功，tabId:${args_xh.tabId[$.nowTabIdIndex]} 的 第 ${page}/${$.totalPages} 页`)
+                        if($.nowTabIdIndex > args_xh.tabId.length){
+                            console.log(`不再获取商品，边缘越界，提交试用中...`)
+                        } else {
+                            console.log(`第 ${size++} 次获取试用商品成功，tabId:${args_xh.tabId[$.nowTabIdIndex]} 的 第 ${page}/${$.totalPages} 页`)
+                        }
                         console.log(`获取到商品 ${data.data.feedList.length} 条`)
                         for(let item of data.data.feedList){
                             if(trialActivityIdList.length >= args_xh.maxLength){
@@ -299,20 +327,28 @@ function try_feedsList(tabId, page){
                             }
                             if(item.skuTitle && $.isPush){
                                 args_xh.printLog ? console.log(`检测 tabId:${args_xh.tabId[$.nowTabIdIndex]} 的 第 ${page}/${$.totalPages} 页 第 ${$.nowItem++ + 1} 个商品\n${item.skuTitle}`) : ''
-                                if(parseFloat(item.jdPrice) <= args_xh.jdPrice){
-                                    args_xh.printLog ? console.log(`商品被过滤，${item.jdPrice} < ${args_xh.jdPrice} \n`) : ''
-                                } else if(parseFloat(item.supplyNum) < args_xh.minSupplyNum && item.supplyNum !== null){
-                                    args_xh.printLog ? console.log(`商品被过滤，提供申请的份数小于预设申请的份数 \n`) : ''
-                                } else if(parseFloat(item.applyNum) > args_xh.applyNumFilter && item.applyNum !== null){
-                                    args_xh.printLog ? console.log(`商品被过滤，已申请试用人数大于预设人数 \n`) : ''
-                                } else if(parseFloat(item.jdPrice) < args_xh.jdPrice){
-                                    args_xh.printLog ? console.log(`商品被过滤，商品原价低于预设商品原价 \n`) : ''
-                                } else if(args_xh.titleFilters.some(fileter_word => item.skuTitle.includes(fileter_word))){
-                                    args_xh.printLog ? console.log('商品被过滤，含有关键词 \n') : ''
+                                if(args_xh.whiteList){
+                                    if(args_xh.whiteListKeywords.some(fileter_word => item.skuTitle.includes(fileter_word))){
+                                        args_xh.printLog ? console.log(`商品通过，将加入试用组，trialActivityId为${item.trialActivityId}\n`) : ''
+                                        trialActivityIdList.push(item.trialActivityId)
+                                        trialActivityTitleList.push(item.skuTitle)
+                                    }
                                 } else {
-                                    args_xh.printLog ? console.log(`商品通过，将加入试用组，trialActivityId为${item.trialActivityId}\n`) : ''
-                                    trialActivityIdList.push(item.trialActivityId)
-                                    trialActivityTitleList.push(item.skuTitle)
+                                    if(parseFloat(item.jdPrice) <= args_xh.jdPrice){
+                                        args_xh.printLog ? console.log(`商品被过滤，${item.jdPrice} < ${args_xh.jdPrice} \n`) : ''
+                                    } else if(parseFloat(item.supplyNum) < args_xh.minSupplyNum && item.supplyNum !== null){
+                                        args_xh.printLog ? console.log(`商品被过滤，提供申请的份数小于预设申请的份数 \n`) : ''
+                                    } else if(parseFloat(item.applyNum) > args_xh.applyNumFilter && item.applyNum !== null){
+                                        args_xh.printLog ? console.log(`商品被过滤，已申请试用人数大于预设人数 \n`) : ''
+                                    } else if(parseFloat(item.jdPrice) < args_xh.jdPrice){
+                                        args_xh.printLog ? console.log(`商品被过滤，商品原价低于预设商品原价 \n`) : ''
+                                    } else if(args_xh.titleFilters.some(fileter_word => item.skuTitle.includes(fileter_word))){
+                                        args_xh.printLog ? console.log('商品被过滤，含有关键词 \n') : ''
+                                    } else {
+                                        args_xh.printLog ? console.log(`商品通过，将加入试用组，trialActivityId为${item.trialActivityId}\n`) : ''
+                                        trialActivityIdList.push(item.trialActivityId)
+                                        trialActivityTitleList.push(item.skuTitle)
+                                    }
                                 }
                             } else if($.isPush !== false){
                                 console.error('skuTitle解析异常')
