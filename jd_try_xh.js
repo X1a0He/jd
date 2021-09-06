@@ -10,7 +10,7 @@
  * 请提前取关至少250个商店确保京东试用脚本正常运行
  *
  * @Address: https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js
- * @LastEditTime: 2021-09-06 14:20:00
+ * @LastEditTime: 2021-09-06 16:54:00
  * @LastEditors: X1a0He
  */
 const $ = new Env('京东试用')
@@ -19,6 +19,7 @@ let trialActivityIdList = []
 let trialActivityTitleList = []
 let notifyMsg = ''
 let size = 1;
+$.isPush = true;
 //下面很重要，遇到问题请把下面注释看一遍再来问
 let args_xh = {
     /*
@@ -104,61 +105,59 @@ let args_xh = {
     console.log(`本脚本默认不运行，也不建议运行\n如需运行请自行添加环境变量：JD_TRY，值填：true\n`)
     await $.wait(500)
     if(process.env.JD_TRY && process.env.JD_TRY === 'true'){
-    await requireConfig()
-    if(!$.cookiesArr[0]){
-        $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
-            "open-url": "https://bean.m.jd.com/"
-        })
-        return
-    }
-    for(let i = 0; i < $.cookiesArr.length; i++){
-        if($.cookiesArr[i]){
-            $.cookie = $.cookiesArr[i];
-            $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
-            $.index = i + 1;
-            $.isLogin = true;
-            $.nickName = '';
-            await totalBean();
-            console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
-            if(!$.isLogin){
-                $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
-                    "open-url": "https://bean.m.jd.com/bean/signIndex.action"
-                });
-                await $.notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-                continue
-            }
-            $.totalTry = 0
-            $.totalSuccess = 0
-            $.nowTabIdIndex = 0;
-            $.nowPage = 1;
-            $.nowItem = 1;
-            /*
-             * // 获取tabList的，不知道有哪些的把这里的注释解开跑一遍就行了
-             * await try_tabList();
-             * return;
-             * */
-            while(trialActivityIdList.length < args_xh.maxLength){
-                await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage++)  //获取对应tabId的试用页面
-                if(trialActivityIdList.length < args_xh.maxLength){
+        await requireConfig()
+        if(!$.cookiesArr[0]){
+            $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
+                "open-url": "https://bean.m.jd.com/"
+            })
+            return
+        }
+        for(let i = 0; i < $.cookiesArr.length; i++){
+            if($.cookiesArr[i]){
+                $.cookie = $.cookiesArr[i];
+                $.UserName = decodeURIComponent($.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1])
+                $.index = i + 1;
+                $.isLogin = true;
+                $.nickName = '';
+                await totalBean();
+                console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
+                if(!$.isLogin){
+                    $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {
+                        "open-url": "https://bean.m.jd.com/bean/signIndex.action"
+                    });
+                    await $.notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+                    continue
+                }
+                $.totalTry = 0
+                $.totalSuccess = 0
+                $.nowTabIdIndex = 0;
+                $.nowPage = 1;
+                $.nowItem = 1;
+                // 获取tabList的，不知道有哪些的把这里的注释解开跑一遍就行了
+                await try_tabList();
+                return;
+                while(trialActivityIdList.length < args_xh.maxLength){
+                    await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage++)  //获取对应tabId的试用页面
+                    if(trialActivityIdList.length < args_xh.maxLength){
+                        console.log(`间隔延时中，请等待 ${args_xh.applyInterval} ms\n`)
+                        await $.wait(args_xh.applyInterval);
+                    }
+                }
+                console.log(`稍后将执行试用申请，请等待 ${args_xh.applyInterval} ms`)
+                await $.wait(args_xh.applyInterval);
+                for(let i = 0; i < trialActivityIdList.length; i++){
+                    await try_apply(trialActivityTitleList[i], trialActivityIdList[i])
                     console.log(`间隔延时中，请等待 ${args_xh.applyInterval} ms\n`)
                     await $.wait(args_xh.applyInterval);
                 }
+                console.log("试用申请执行完毕...")
+                // await try_MyTrials(1, 1)    //申请中的商品
+                await try_MyTrials(1, 2)    //申请成功的商品
+                // await try_MyTrials(1, 3)    //申请失败的商品
+                await showMsg()
             }
-            console.log(`稍后将执行试用申请，请等待 ${args_xh.applyInterval} ms`)
-            await $.wait(args_xh.applyInterval);
-            for(let i = 0; i < trialActivityIdList.length; i++){
-                await try_apply(trialActivityTitleList[i], trialActivityIdList[i])
-                console.log(`间隔延时中，请等待 ${args_xh.applyInterval} ms\n`)
-                await $.wait(args_xh.applyInterval);
-            }
-            console.log("试用申请执行完毕...")
-            // await try_MyTrials(1, 1)    //申请中的商品
-            await try_MyTrials(1, 2)    //申请成功的商品
-            // await try_MyTrials(1, 3)    //申请失败的商品
-            await showMsg()
         }
-    }
-    await $.notify.sendNotify(`${$.name}`, notifyMsg);
+        await $.notify.sendNotify(`${$.name}`, notifyMsg);
     } else {
         console.log(`\n您未设置运行【京东试用】脚本，结束运行！\n`)
     }
@@ -198,31 +197,31 @@ function requireConfig(){
 
 //获取tabList的，如果不知道tabList有哪些，跑一遍这个function就行了
 function try_tabList(){
-    // return new Promise((resolve, reject) => {
-    //     console.log(`获取tabList中...`)
-    //     const body = JSON.stringify({
-    //         "previewTime": ""
-    //     });
-    //     let option = taskurl_xh('newtry', 'try_tabList', body)
-    //     $.get(option, (err, resp, data) => {
-    //         try{
-    //             if(err){
-    //                 console.log(`🚫 ${arguments.callee.name.toString()} API请求失败，请检查网络\n${JSON.stringify(err)}`)
-    //             } else {
-    //                 data = JSON.parse(data)
-    //                 if(data.success){
-    //                     for(let tabId of data.data.tabList) console.log(`${data.data.tabName} - ${data.data.tabId}`)
-    //                 } else {
-    //                     console.log("获取失败", data)
-    //                 }
-    //             }
-    //         } catch(e){
-    //             reject(`⚠️ ${arguments.callee.name.toString()} API返回结果解析出错\n${e}\n${JSON.stringify(data)}`)
-    //         } finally{
-    //             resolve()
-    //         }
-    //     })
-    // })
+    return new Promise((resolve, reject) => {
+        console.log(`获取tabList中...`)
+        const body = JSON.stringify({
+            "previewTime": ""
+        });
+        let option = taskurl_xh('newtry', 'try_tabList', body)
+        $.get(option, (err, resp, data) => {
+            try{
+                if(err){
+                    console.log(`🚫 ${arguments.callee.name.toString()} API请求失败，请检查网络\n${JSON.stringify(err)}`)
+                } else {
+                    data = JSON.parse(data)
+                    if(data.success){
+                        for(let tabId of data.data.tabList) console.log(`${tabId.tabName} - ${tabId.tabId}`)
+                    } else {
+                        console.log("获取失败", data)
+                    }
+                }
+            } catch(e){
+                reject(`⚠️ ${arguments.callee.name.toString()} API返回结果解析出错\n${e}\n${JSON.stringify(data)}`)
+            } finally{
+                resolve()
+            }
+        })
+    })
 }
 
 //获取商品列表并且过滤 By X1a0He
