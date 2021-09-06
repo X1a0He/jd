@@ -1,7 +1,7 @@
 /*
  * @Author: X1a0He
  * @Date: 2021-09-04 11:50:47
- * @LastEditTime: 2021-09-06 20:00:00
+ * @LastEditTime: 2021-09-06 15:00:00
  * @LastEditors: X1a0He
  * @Description: 批量取关京东店铺和商品
  * @Fixed: 不再支持Qx，仅支持Node.js
@@ -45,17 +45,17 @@ let args_xh = {
      * 商品类过滤关键词，只要商品名内包含关键词，则不会被取消关注
      * 可设置环境变量：JD_UNSUB_GKEYWORDS，用@分隔
      * */
-    goodsKeyWords: process.env.JD_UNSUB_GKEYWORDS && process.env.JD_UNSUB_GKEYWORDS.split('@') || ['旺仔'],
+    goodsKeyWords: process.env.JD_UNSUB_GKEYWORDS && process.env.JD_UNSUB_GKEYWORDS.split('@') || [],
     /*
      * 店铺类过滤关键词，只要店铺名内包含关键词，则不会被取消关注
      * 可设置环境变量：JD_UNSUB_SKEYWORDS，用@分隔
      * */
-    shopKeyWords: process.env.JD_UNSUB_SKEYWORDS && process.env.JD_UNSUB_SKEYWORDS.split('@') || ["官方"],
+    shopKeyWords: process.env.JD_UNSUB_SKEYWORDS && process.env.JD_UNSUB_SKEYWORDS.split('@') || [],
     /*
      * 间隔，防止提示操作频繁，单位毫秒(1秒 = 1000毫秒)
      * 可用环境变量控制：JD_UNSUB_INTERVAL，默认为3000毫秒
      * */
-    unSubscribeInterval: process.env.JD_UNSUB_INTERVAL * 1 || 3000,
+    unSubscribeInterval: process.env.JD_UNSUB_INTERVAL * 1 || 1000,
     printLog: process.env.JD_UNSUB_PLOG || true
 }
 !(async() => {
@@ -106,9 +106,9 @@ let args_xh = {
                 await $.wait(1000)
                 if(!$.endGoods && parseInt($.goodsTotalNum) !== parseInt($.goodsKeyWordsNum)) await favCommBatchDel();//取关商品
                 else console.log("不执行取消收藏商品\n")
-                await $.wait(1000)
+                await $.wait(args_xh.unSubscribeInterval)
                 await queryShopFavList();   //获取店铺并过滤
-                await $.wait(1000)
+                await $.wait(args_xh.unSubscribeInterval)
                 if(!$.endShops && parseInt($.shopsTotalNum) !== parseInt($.shopsKeyWordsNum)) await batchunfollow();      //取关店铺
                 else console.log("不执行取消收藏店铺\n")
                 do {
@@ -121,7 +121,7 @@ let args_xh = {
                             else {
                                 $.commIdList = ``
                                 await favCommQueryFilter(); //获取商品并过滤
-                                await $.wait(1000)
+                                await $.wait(args_xh.unSubscribeInterval)
                                 if(!$.endGoods && parseInt($.goodsTotalNum) !== parseInt($.goodsKeyWordsNum)) await favCommBatchDel();    //取关商品
                                 else console.log("不执行取消收藏商品\n")
                             }
@@ -130,7 +130,7 @@ let args_xh = {
                             else {
                                 $.shopIdList = ``
                                 await queryShopFavList();   //获取店铺并过滤
-                                await $.wait(1000)
+                                await $.wait(args_xh.unSubscribeInterval)
                                 if(!$.endShops && parseInt($.shopsTotalNum) !== parseInt($.shopsKeyWordsNum)) await batchunfollow();      //取关店铺
                                 else console.log("不执行取消收藏店铺\n")
                             }
