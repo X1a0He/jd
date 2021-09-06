@@ -1,11 +1,15 @@
 # 由本人修复的京东类脚本，引用请注明来源
 
-## Contact：[X1a0He](https://t.me/X1a0He) 需要科学上网，没有的请提issues
+## Contact：[X1a0He](https://t.me/X1a0He)
 
 # ToDo
 - [x] Fixed:取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1) 
 
 # Fixlog
+- 2021-09-06 22:03 Fix [jd_car_exchange_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_car_exchange_xh.js)
+```
+修复兑换api
+```
 - 2021-09-06 20:08 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
 ```
 修复取关店铺遇到关键字会进入死循环的问题
