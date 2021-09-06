@@ -136,8 +136,10 @@ let args_xh = {
                 $.nowItem = 1;
                 trialActivityIdList = []
                 trialActivityTitleList = []
+                $.isLimit = false;
                 console.log(`trialActivityIdList长度：${trialActivityIdList.length}`)
                 console.log(`trialActivityTitleList长度：${trialActivityTitleList.length}`)
+                console.log(`$.isLimit为：${$.isLimit}`)
                 // 获取tabList的，不知道有哪些的把这里的注释解开跑一遍就行了
                 // await try_tabList();
                 // return;
@@ -148,7 +150,7 @@ let args_xh = {
                         await $.wait(args_xh.applyInterval);
                     }
                 }
-                console.log(`稍后将执行试用申请，请等待 ${args_xh.applyInterval} ms`)
+                console.log(`稍后将执行试用申请，请等待 ${args_xh.applyInterval} ms\n`)
                 await $.wait(args_xh.applyInterval);
                 for(let i = 0; i < trialActivityIdList.length && $.isLimit === false; i++){
                     if($.isLimit){
