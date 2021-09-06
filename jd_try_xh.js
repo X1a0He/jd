@@ -20,6 +20,7 @@ let trialActivityTitleList = []
 let notifyMsg = ''
 let size = 1;
 $.isPush = true;
+$.isLimit = false;
 //下面很重要，遇到问题请把下面注释看一遍再来问
 let args_xh = {
     /*
@@ -134,8 +135,8 @@ let args_xh = {
                 $.nowPage = 1;
                 $.nowItem = 1;
                 // 获取tabList的，不知道有哪些的把这里的注释解开跑一遍就行了
-                await try_tabList();
-                return;
+                // await try_tabList();
+                // return;
                 while(trialActivityIdList.length < args_xh.maxLength){
                     await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage++)  //获取对应tabId的试用页面
                     if(trialActivityIdList.length < args_xh.maxLength){
@@ -145,7 +146,11 @@ let args_xh = {
                 }
                 console.log(`稍后将执行试用申请，请等待 ${args_xh.applyInterval} ms`)
                 await $.wait(args_xh.applyInterval);
-                for(let i = 0; i < trialActivityIdList.length; i++){
+                for(let i = 0; i < trialActivityIdList.length && $.isLimit === false; i++){
+                    if($.isLimit){
+                        console.log("试用上限")
+                        break
+                    }
                     await try_apply(trialActivityTitleList[i], trialActivityIdList[i])
                     console.log(`间隔延时中，请等待 ${args_xh.applyInterval} ms\n`)
                     await $.wait(args_xh.applyInterval);
@@ -343,6 +348,9 @@ function try_apply(title, activityId){
                         console.log(data.message)   // 您还不是会员，本品只限会员申请试用，请注册会员后申请！
                     } else if(data.code === "-167"){
                         console.log(data.message)   // 抱歉，此试用需为种草官才能申请。查看下方详情了解更多。
+                    } else if(data.code === "-131"){
+                        console.log(data.message)   // 申请次数上限。
+                        $.isLimit = true;
                     } else {
                         console.log("申请失败", data)
                     }
