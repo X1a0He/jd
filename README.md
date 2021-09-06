@@ -1,6 +1,6 @@
 # 由本人修复的京东类脚本，引用请注明来源
 
-## Contact：[X1a0He](https://t.me/X1a0He)
+## Contact：[X1a0He](https://t.me/X1a0He) 需要科学上网，没有的请提issues
 
 # ToDo
 - [x] Fixed:取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1) 
