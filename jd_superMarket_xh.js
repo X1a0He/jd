@@ -37,7 +37,8 @@ let message = '',
 const JD_API_HOST = 'https://api.m.jd.com/api';
 //助力好友分享码
 //此此内容是IOS用户下载脚本到本地使用，填写互助码的地方，同一京东账号的好友互助码请使用@符号隔开。
-let shareCodes = [] !(async () => {
+let shareCodes = [] 
+!(async () => {
         await requireConfig();
         if (!cookiesArr[0]) {
             $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {
