@@ -1,9 +1,14 @@
 # 由本人修复的京东类脚本，引用请注明来源
 支持且仅支持Node.js，青龙面板，我是测试过能跑才会放上来的
+
 没有拉库命令，自己找
+
 可能一天会commit几十次
+
 因为有空的话修得频繁，有时可能是着急了没想太多随便修修就commit的
+
 设置了什么commit通知的关了吧，别监控这个库了
+
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # UpdateLog
  - 2021-09-06 22:09 Update [jdCookie_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jdCookie_xh.js)
