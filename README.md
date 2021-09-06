@@ -1,6 +1,10 @@
 # 由本人修复的京东类脚本，引用请注明来源
-
-## Contact：[X1a0He](https://t.me/X1a0He)
+支持且仅支持Node.js，青龙面板，我是测试过能跑才会放上来的
+没有拉库命令，自己找
+可能一天会commit几十次
+因为有空的话修得频繁，有时可能是着急了没想太多随便修修就commit的
+设置了什么commit通知的关了吧，别监控这个库了
+## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # UpdateLog
  - 2021-09-06 22:09 Update [jdCookie_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jdCookie_xh.js)
  ```
@@ -9,6 +13,11 @@
  [2021-09-06 22:07:40] 读取到3个京东账号Cookie
  ```
 # ToDo
+- [ ] 简化jd_bean_change.js
+```
+初步构思，每两个账号推送一遍，防止长度过长无法推送，例如Bark就是3个账号推送不了
+我看看怎样在原有数据的基础上简化一下，有好idea的可以联系我
+```
 - [x] Fixed:取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1) 
 
 # Fixlog
