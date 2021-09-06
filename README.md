@@ -1,7 +1,11 @@
-# jd_scripts
-由本人修复的京东类脚本，引用请注明来源
+# 由本人修复的京东类脚本，引用请注明来源
 
-## Contact：https://t.me/X1a0He
+## Contact：[X1a0He](https://t.me/X1a0He)
+
+# Fixlog
+
+# ToDo
+- [ ] 取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1)
 
 # 使用前必读
 库如其名，这里是一些由我亲自修复的京东类脚本，你完全可以在Nodejs环境下正常运行，但不排除会有逻辑性错误
