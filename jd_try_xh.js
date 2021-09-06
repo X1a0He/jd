@@ -29,7 +29,7 @@ let args_xh = {
      * B商品原价99元，试用价0元，如果下面设置为50，那么B商品将会被加入到待提交的试用组
      * 默认为0
      * */
-    jdPrice: process.env.JD_TRY_PRICE || 0,
+    jdPrice: process.env.JD_TRY_PRICE * 1 || 0,
     /*
      * 获取试用商品类型，默认为1，原来不是数组形式，我以为就只有几个tab，结果后面还有我服了
      * 1 - 精选
@@ -56,31 +56,31 @@ let args_xh = {
      * C商品原价49元，现在试用价1元，如果下面设置为1，那C商品也会被添加到带提交试用组，因为1 = 1
      * 可设置环境变量：JD_TRY_TRIALPRICE，默认为0
      * */
-    trialPrice: process.env.JD_TRY_TRIALPRICE || 0,
+    trialPrice: process.env.JD_TRY_TRIALPRICE * 1 || 0,
     /*
      * 最小提供数量，例如试用商品只提供2份试用资格，当前设置为1，则会进行申请
      * 若只提供5分试用资格，当前设置为10，则不会申请
      * 可设置环境变量：JD_TRY_MINSUPPLYNUM
      * */
-    minSupplyNum: process.env.JD_TRY_MINSUPPLYNUM || 1,
+    minSupplyNum: process.env.JD_TRY_MINSUPPLYNUM * 1 || 1,
     /*
      * 过滤大于设定值的已申请人数，例如下面设置的1000，A商品已经有1001人申请了，则A商品不会进行申请，会被跳过
      * 可设置环境变量：JD_TRY_APPLYNUMFILTER
      * */
-    applyNumFilter: process.env.JD_TRY_APPLYNUMFILTER || 10000,
+    applyNumFilter: process.env.JD_TRY_APPLYNUMFILTER * 1 || 10000,
     /*
      * 商品试用之间和获取商品之间的间隔, 单位：毫秒(1秒=1000毫秒)
      * 可设置环境变量：JD_TRY_APPLYINTERVAL
      * 默认为3000，也就是3秒
      * */
-    applyInterval: process.env.JD_TRY_APPLYINTERVAL || 5000,
+    applyInterval: process.env.JD_TRY_APPLYINTERVAL * 1 || 5000,
     /*
      * 商品数组的最大长度，通俗来说就是即将申请的商品队列长度
      * 例如设置为20，当第一次获取后获得12件，过滤后剩下5件，将会进行第二次获取，过滤后加上第一次剩余件数
      * 例如是18件，将会进行第三次获取，直到过滤完毕后为20件才会停止，不建议设置太大
      * 可设置环境变量：JD_TRY_MAXLENGTH
      * */
-    maxLength: process.env.JD_TRY_MAXLENGTH || 10,
+    maxLength: process.env.JD_TRY_MAXLENGTH * 1 || 10,
     /*
      * 过滤种草官类试用，某些试用商品是专属官专属，考虑到部分账号不是种草官账号
      * 例如A商品是种草官专属试用商品，下面设置为true，而你又不是种草官账号，那A商品将不会被添加到待提交试用组
@@ -134,6 +134,10 @@ let args_xh = {
                 $.nowTabIdIndex = 0;
                 $.nowPage = 1;
                 $.nowItem = 1;
+                trialActivityIdList = []
+                trialActivityTitleList = []
+                console.log(`trialActivityIdList长度：${trialActivityIdList.length}`)
+                console.log(`trialActivityTitleList长度：${trialActivityTitleList.length}`)
                 // 获取tabList的，不知道有哪些的把这里的注释解开跑一遍就行了
                 // await try_tabList();
                 // return;
@@ -189,12 +193,26 @@ function requireConfig(){
             //IOS等用户直接用NobyDa的jd $.cookie
             $.cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
         }
+        args_xh.passZhongCao = process.env.JD_TRY_PASSZC === 'true';
+        args_xh.printLog = process.env.JD_TRY_PLOG === 'true';
         console.log(`共${$.cookiesArr.length}个京东账号\n`)
-        for(const key in args_xh){
-            if(typeof args_xh[key] == 'string'){
-                args_xh[key] = Number(args_xh[key])
-            }
-        }
+        console.log('=====环境变量配置如下=====')
+        console.log(`jdPrice: ${typeof args_xh.jdPrice}, ${args_xh.jdPrice}`)
+        console.log(`tabId: ${typeof args_xh.tabId}, ${args_xh.tabId}`)
+        console.log(`titleFilters: ${typeof args_xh.titleFilters}, ${args_xh.titleFilters}`)
+        console.log(`trialPrice: ${typeof args_xh.trialPrice}, ${args_xh.trialPrice}`)
+        console.log(`minSupplyNum: ${typeof args_xh.minSupplyNum}, ${args_xh.minSupplyNum}`)
+        console.log(`applyNumFilter: ${typeof args_xh.applyNumFilter}, ${args_xh.applyNumFilter}`)
+        console.log(`applyInterval: ${typeof args_xh.applyInterval}, ${args_xh.applyInterval}`)
+        console.log(`maxLength: ${typeof args_xh.maxLength}, ${args_xh.maxLength}`)
+        console.log(`passZhongCao: ${typeof args_xh.passZhongCao}, ${args_xh.passZhongCao}`)
+        console.log(`printLog: ${typeof args_xh.printLog}, ${args_xh.printLog}`)
+        console.log('=======================')
+        // for(const key in args_xh){
+        //     if(typeof args_xh[key] == 'string'){
+        //         args_xh[key] = Number(args_xh[key])
+        //     }
+        // }
         // console.debug(args_xh)
         resolve()
     })
@@ -438,13 +456,6 @@ function try_MyTrials(page, selected){
             }
         })
     })
-}
-
-function remaining(time){
-    let days = parseInt(time / (1000 * 60 * 60 * 24));
-    let hours = parseInt((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = parseInt((time % (1000 * 60 * 60)) / (1000 * 60));
-    return `${days} 天 ${hours} 小时 ${minutes} 分`
 }
 
 function taskurl_xh(appid, functionId, body = JSON.stringify({})){
