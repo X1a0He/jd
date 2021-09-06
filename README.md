@@ -3,6 +3,12 @@
 ## Contact：[X1a0He](https://t.me/X1a0He)
 
 # Fixlog
+- 2021-09-06 16:47 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+修复trialActivityIdList和trialActivityTitleList忘记重置导致部分情况执行后下一账号无法执行的问题
+修复无法读取或读取环境变量错误的问题
+日志新增了各个环境变量的类型，有问题请带日志反馈
+```
 - 2021-09-06 15:58 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 修复tabList函数无法输出tabId和对应tabName的问题
