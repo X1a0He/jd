@@ -3,6 +3,17 @@
 ## Contact：[X1a0He](https://t.me/X1a0He)
 
 # Fixlog
+- 2021-09-06 20:08 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
+```
+修复取关店铺遇到关键字会进入死循环的问题
+重写所有变量，支持环境变量控制内部变量
+不在支持QuantumultX或其他，支持且仅支持Node.js
+```
+- 2021-09-06 20:08 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+修复不存在布尔型环境变量时，内部读取类型错误且相关默认值不生效的问题
+新增白名单功能，详情请查看脚本内注释
+```
 - 2021-09-06 16:47 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 修复trialActivityIdList和trialActivityTitleList忘记重置导致部分情况执行后下一账号无法执行的问题
