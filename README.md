@@ -3,6 +3,12 @@
 ## Contact：[X1a0He](https://t.me/X1a0He)
 
 # Fixlog
+- 2021-09-06 15:58 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+修复tabList函数无法输出tabId和对应tabName的问题
+修复因$.isPush未提前定义导致过滤时提醒skuTitle解析异常的问题
+修复当达到申请次数上限300次的时候不会自动停止的问题
+```
  - 2021-09-06 14:20 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
  ```
  更改tabId的类型为数组
