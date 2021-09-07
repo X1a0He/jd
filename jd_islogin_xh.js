@@ -5,7 +5,9 @@
  * */
 const $ = new Env("京东检测Cookie是否有效");
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
+const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [], cookie = "", message;
+$.context = ``;
 if($.isNode()){
     Object.keys(jdCookieNode).forEach((item) => {cookiesArr.push(jdCookieNode[item]);});
     if(process.env.JD_DEBUG && process.env.JD_DEBUG === "false") console.log = () => {};
@@ -23,8 +25,12 @@ if($.isNode()){
             message = "";
             console.log(`[京东账号${$.index} ${$.UserName}] 正在检测...`);
             await isLogin();
-            await $.wait(2000);
+            await $.wait(1000);
         }
+    }
+    if($.isNode()){
+        console.log('正在发送通知...')
+        await notify.sendNotify(`${$.name}`, `${$.context}`)
     }
 })().catch((e) => {
     $.log("", `❌ ${$.name}, 失败! 原因: ${e}!`, "");
@@ -46,9 +52,16 @@ function isLogin(){
             try{
                 if(safeGet(data)){
                     data = JSON.parse(data);
-                    if(data.islogin === "1") console.log(`[京东账号${$.index} ${$.UserName}] ✅Cookie有效\n`)
-                    else if(data.islogin === "0") console.log(`[京东账号${$.index} ${$.UserName}] ❌Cookie失效了...\n`)
-                    else console.log(`[京东账号${$.index} ${$.UserName}] ⚠️未知返回...\n`)
+                    if(data.islogin === "1"){
+                        console.log(`[京东账号${$.index} ${$.UserName}] ✅Cookie有效\n`)
+                        $.context += `[京东账号${$.index} ${$.UserName}] ✅Cookie有效\n`
+                    } else if(data.islogin === "0"){
+                        console.log(`[京东账号${$.index} ${$.UserName}] ❌Cookie失效了...\n`)
+                        $.context += `[京东账号${$.index} ${$.UserName}] ❌Cookie失效了...\n`
+                    } else {
+                        console.log(`[京东账号${$.index} ${$.UserName}] ⚠️未知返回...\n`)
+                        $.context += `[京东账号${$.index} ${$.UserName}] ⚠️未知返回...\n`
+                    }
                 }
             } catch(e){
                 console.log(e);
