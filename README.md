@@ -11,6 +11,15 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # UpdateLog
+ - 2021-09-07 12:02 Update [jd_islogin_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_islogin_xh.js)
+ ```
+检测Cookie是否有效
+[京东账号1 xxxxxxxxxx] 正在检测...
+[京东账号1 xxxxxxxxxx] ✅Cookie有效
+
+[京东账号2 xxxxxxxxxx] 正在检测...
+[京东账号2 xxxxxxxxxx] ❌Cookie失效了...
+ ```
  - 2021-09-06 22:09 Update [jdCookie_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jdCookie_xh.js)
  ```
  原文件的输出太长，我自己改成了下面的形式
