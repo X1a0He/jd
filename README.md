@@ -1,3 +1,4 @@
+## 抱歉今天9月7日是我的生日，没有花太多时间commit
 # 由本人修复的京东类脚本，引用请注明来源
 支持且仅支持Node.js，青龙面板，我是测试过能跑才会放上来的
 
@@ -11,6 +12,14 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # UpdateLog
+ - 2021-09-07 23:43 Update [jd_bean_change_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
+ ```
+ 简化了京东日资产通知
+ 增加可通过环境变量来控制每次发送的账号数量
+ JD_BEAN_CHANGE_SENDNUM 默认为2
+ 效果如下
+ ```
+![](https://www.x1a0he.com/wp-content/uploads/2021/09/WechatIMG68.jpeg)
  - 2021-09-07 12:02 Update [jd_islogin_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_islogin_xh.js)
  ```
 检测Cookie是否有效
@@ -27,7 +36,7 @@
  [2021-09-06 22:07:40] 读取到3个京东账号Cookie
  ```
 # ToDo
-- [ ] 简化jd_bean_change.js
+- [x] 简化jd_bean_change.js
 ```
 初步构思，每两个账号推送一遍，防止长度过长无法推送，例如Bark就是3个账号推送不了
 我看看怎样在原有数据的基础上简化一下，有好idea的可以联系我
