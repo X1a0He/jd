@@ -10,43 +10,16 @@
 设置了什么commit通知的关了吧，别监控这个库了
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
-# ToDo
-- [ ] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js) [#2](https://github.com/X1a0He/jd_scripts_fixed/issues/2) [#3](https://github.com/X1a0He/jd_scripts_fixed/issues/3)
+# Fixlog
+- 2021-09-08 17:24 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 支持黑名单过滤关键词时 输出对应关键词
 对应账号遇到403风控后将不会再执行
+未到申请时间的商品会自动跳过
+修复当tabId组遍历完毕后tabId变成undefined的问题
+为了防止风控，将遍历数据的默认间隔提升到2000毫秒
+调整默认试用组长度为50
 ```
-- [x] 简化jd_bean_change.js
-```
-初步构思，每两个账号推送一遍，防止长度过长无法推送，例如Bark就是3个账号推送不了
-我看看怎样在原有数据的基础上简化一下，有好idea的可以联系我
-```
-- [x] Fixed:取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1) 
-# UpdateLog
- - 2021-09-07 23:43 Update [jd_bean_change_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
- ```
- 简化了京东日资产通知
- 增加可通过环境变量来控制每次发送的账号数量
- JD_BEAN_CHANGE_SENDNUM 默认为2
- 效果如下
- ```
-![](https://camo.githubusercontent.com/9ea74bcdcd3560f70e77a50210d52ccfdea6f8ac4019ba419b863523a119549c/68747470733a2f2f7777772e7831613068652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f30392f576563686174494d4736382e6a706567)
- - 2021-09-07 12:02 Update [jd_islogin_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_islogin_xh.js)
- ```
-检测Cookie是否有效
-[京东账号1 xxxxxxxxxx] 正在检测...
-[京东账号1 xxxxxxxxxx] ✅Cookie有效
-
-[京东账号2 xxxxxxxxxx] 正在检测...
-[京东账号2 xxxxxxxxxx] ❌Cookie失效了...
- ```
- - 2021-09-06 22:09 Update [jdCookie_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jdCookie_xh.js)
- ```
- 原文件的输出太长，我自己改成了下面的形式
- 不喜勿下
- [2021-09-06 22:07:40] 读取到3个京东账号Cookie
- ```
-# Fixlog
 - 2021-09-07 12:15 Fix [jd_islogin_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_islogin_xh.js)
 ```
 修复了没有通知的问题
@@ -85,6 +58,42 @@
  增加是否输出到日志
  修复当maxLength过大的时候，会出现自动停止的问题
 ```
+# ToDo
+- [x] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js) [#2](https://github.com/X1a0He/jd_scripts_fixed/issues/2) [#3](https://github.com/X1a0He/jd_scripts_fixed/issues/3)
+```
+支持黑名单过滤关键词时 输出对应关键词
+对应账号遇到403风控后将不会再执行
+```
+- [x] 简化jd_bean_change.js
+```
+初步构思，每两个账号推送一遍，防止长度过长无法推送，例如Bark就是3个账号推送不了
+我看看怎样在原有数据的基础上简化一下，有好idea的可以联系我
+```
+- [x] Fixed:取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1) 
+# UpdateLog
+ - 2021-09-07 23:43 Update [jd_bean_change_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
+ ```
+ 简化了京东日资产通知
+ 增加可通过环境变量来控制每次发送的账号数量
+ JD_BEAN_CHANGE_SENDNUM 默认为2
+ 效果如下
+ ```
+![](https://camo.githubusercontent.com/9ea74bcdcd3560f70e77a50210d52ccfdea6f8ac4019ba419b863523a119549c/68747470733a2f2f7777772e7831613068652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f30392f576563686174494d4736382e6a706567)
+ - 2021-09-07 12:02 Update [jd_islogin_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_islogin_xh.js)
+ ```
+检测Cookie是否有效
+[京东账号1 xxxxxxxxxx] 正在检测...
+[京东账号1 xxxxxxxxxx] ✅Cookie有效
+
+[京东账号2 xxxxxxxxxx] 正在检测...
+[京东账号2 xxxxxxxxxx] ❌Cookie失效了...
+ ```
+ - 2021-09-06 22:09 Update [jdCookie_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jdCookie_xh.js)
+ ```
+ 原文件的输出太长，我自己改成了下面的形式
+ 不喜勿下
+ [2021-09-06 22:07:40] 读取到3个京东账号Cookie
+ ```
 # 使用前必读
 库如其名，这里是一些由我亲自修复的京东类脚本，你完全可以在Nodejs环境下正常运行，但不排除会有逻辑性错误
 
