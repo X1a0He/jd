@@ -1,4 +1,3 @@
-## 抱歉今天9月7日是我的生日，没有花太多时间commit
 # 由本人修复的京东类脚本，引用请注明来源
 支持且仅支持Node.js，青龙面板，我是测试过能跑才会放上来的
 
@@ -11,6 +10,18 @@
 设置了什么commit通知的关了吧，别监控这个库了
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
+# ToDo
+- [ ] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js) [#2](https://github.com/X1a0He/jd_scripts_fixed/issues/2) [#3](https://github.com/X1a0He/jd_scripts_fixed/issues/3)
+```
+支持黑名单过滤关键词时 输出对应关键词
+对应账号遇到403风控后将不会再执行
+```
+- [x] 简化jd_bean_change.js
+```
+初步构思，每两个账号推送一遍，防止长度过长无法推送，例如Bark就是3个账号推送不了
+我看看怎样在原有数据的基础上简化一下，有好idea的可以联系我
+```
+- [x] Fixed:取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1) 
 # UpdateLog
  - 2021-09-07 23:43 Update [jd_bean_change_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
  ```
@@ -19,7 +30,7 @@
  JD_BEAN_CHANGE_SENDNUM 默认为2
  效果如下
  ```
-![](https://www.x1a0he.com/wp-content/uploads/2021/09/WechatIMG68.jpeg)
+![](https://camo.githubusercontent.com/9ea74bcdcd3560f70e77a50210d52ccfdea6f8ac4019ba419b863523a119549c/68747470733a2f2f7777772e7831613068652e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032312f30392f576563686174494d4736382e6a706567)
  - 2021-09-07 12:02 Update [jd_islogin_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_islogin_xh.js)
  ```
 检测Cookie是否有效
@@ -35,14 +46,6 @@
  不喜勿下
  [2021-09-06 22:07:40] 读取到3个京东账号Cookie
  ```
-# ToDo
-- [x] 简化jd_bean_change.js
-```
-初步构思，每两个账号推送一遍，防止长度过长无法推送，例如Bark就是3个账号推送不了
-我看看怎样在原有数据的基础上简化一下，有好idea的可以联系我
-```
-- [x] Fixed:取关店铺遇到关键字会进入死循环 [#1](https://github.com/X1a0He/jd_scripts_fixed/issues/1) 
-
 # Fixlog
 - 2021-09-07 12:15 Fix [jd_islogin_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_islogin_xh.js)
 ```
