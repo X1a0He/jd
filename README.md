@@ -11,6 +11,13 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-09 21:34 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+增加了几个默认的关键词，用于屏蔽成人类商品
+取消默认不运行，现在默认运行了，毕竟脚本稳定了
+调整默认单次运行申请的商品为100个
+调整默认的tabList为1到10
+```
 - 2021-09-09 13:52 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 修复试用成功的商品推送里面还是显示0的问题
