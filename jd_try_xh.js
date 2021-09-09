@@ -154,6 +154,7 @@ let args_xh = {
                 // await try_tabList();
                 // return;
                 $.isForbidden = false
+                size = 1
                 while(trialActivityIdList.length < args_xh.maxLength && $.isForbidden === false){
                     if($.nowTabIdIndex === args_xh.tabId.length){
                         console.log(`tabId组已遍历完毕，不在获取商品\n`);
