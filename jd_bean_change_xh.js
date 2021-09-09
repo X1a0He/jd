@@ -238,7 +238,7 @@ function taskcashUrl(functionId, body = {}){
     const crypto = require('crypto-js');
     let sign = crypto.HmacSHA256(message, key).toString();
     return {
-        url: `${JD_API_HOST}api?functionId=${functionId}&body=${escape(JSON.stringify(body))}&appid=lite-android&client=android&uuid=846c4c32dae910ef&clientVersion=3.1.0&t=${timestamp}&sign=${sign}`,
+        url: `${JD_API_HOST}?functionId=${functionId}&body=${escape(JSON.stringify(body))}&appid=lite-android&client=android&uuid=846c4c32dae910ef&clientVersion=3.1.0&t=${timestamp}&sign=${sign}`,
         headers: {
             'Host': 'api.m.jd.com',
             'accept': '*/*',
