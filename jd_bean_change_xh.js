@@ -231,18 +231,22 @@ function cash(){
     })
 }
 
-function taskcashUrl(functionId, body = {}){
-    let timestamp = +new Date();
-    let message = `lite-android&${JSON.stringify(body)}&android&3.1.0&${functionId}&${timestamp}&846c4c32dae910ef`;
-    let key = "12aea658f76e453faf803d15c40a72e0";
-    const crypto = require('crypto-js');
-    let sign = crypto.HmacSHA256(message, key).toString();
+var __Oxb24bc = ["lite-android&", "stringify", "&android&3.1.0&", "&", "&846c4c32dae910ef", "12aea658f76e453faf803d15c40a72e0", "isNode", "crypto-js", "", "api?functionId=", "&body=", "&appid=lite-android&client=android&uuid=846c4c32dae910ef&clientVersion=3.1.0&t=", "&sign=", "api.m.jd.com", "*/*", "RN", "JDMobileLite/3.1.0 (iPad; iOS 14.4; Scale/2.00)", "zh-Hans-CN;q=1, ja-CN;q=0.9", "undefined", "log", "", "", "", "", "jsjia", "mi.com"];
+
+function taskcashUrl(_0x7683x2, _0x7683x3 = {}){
+    let _0x7683x4 = +new Date();
+    let _0x7683x5 = `${__Oxb24bc[0x0]}${JSON[__Oxb24bc[0x1]](_0x7683x3)}${__Oxb24bc[0x2]}${_0x7683x2}${__Oxb24bc[0x3]}${_0x7683x4}${__Oxb24bc[0x4]}`;
+    let _0x7683x6 = __Oxb24bc[0x5];
+    const _0x7683x7 = $[__Oxb24bc[0x6]]() ? require(__Oxb24bc[0x7]) : CryptoJS;
+    let _0x7683x8 = _0x7683x7.HmacSHA256(_0x7683x5, _0x7683x6).toString();
     return {
-        url: `${JD_API_HOST}?functionId=${functionId}&body=${escape(JSON.stringify(body))}&appid=lite-android&client=android&uuid=846c4c32dae910ef&clientVersion=3.1.0&t=${timestamp}&sign=${sign}`,
+        url: `${__Oxb24bc[0x8]}${JD_API_HOST}${__Oxb24bc[0x9]}${_0x7683x2}${__Oxb24bc[0xa]}${escape(JSON[__Oxb24bc[0x1]](_0x7683x3))}${__Oxb24bc[0xb]}${_0x7683x4}${__Oxb24bc[0xc]}${_0x7683x8}${__Oxb24bc[0x8]}`,
         headers: {
-            'Host': 'api.m.jd.com',
-            'accept': '*/*',
-            'user-agent': 'JDMobileLite/3.1.0 (iPad; iOS 14.4; Scale/2.00)',
+            'Host': __Oxb24bc[0xd],
+            'accept': __Oxb24bc[0xe],
+            'kernelplatform': __Oxb24bc[0xf],
+            'user-agent': __Oxb24bc[0x10],
+            'accept-language': __Oxb24bc[0x11],
             'Cookie': cookie
         }
     }
