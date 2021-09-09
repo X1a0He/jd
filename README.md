@@ -11,6 +11,11 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-09 13:52 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+修复试用成功的商品推送里面还是显示0的问题
+如果上述问题没有被修复，还是显示0，请带上你的cookie私聊tg找我
+```
 - 2021-09-08 17:24 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 支持黑名单过滤关键词时 输出对应关键词
