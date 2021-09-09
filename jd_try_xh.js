@@ -485,7 +485,7 @@ function try_MyTrials(page, selected){
                             if(data.success && data.data){
                                 for(let item of data.data.list){
                                     item.status === 4 || item.text.text.includes('已放弃') ? $.giveupNum += 1 : ''
-                                    item.text.text.includes('请尽快领取') ? $.successNum += 1 : ''
+                                    item.text.text.includes('试用资格将保留') ? $.successNum += 1 : ''
                                 }
                                 console.log(`待领取 | 已放弃：${$.successNum} | ${$.giveupNum}`)
                             } else {
