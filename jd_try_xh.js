@@ -548,7 +548,7 @@ async function showMsg(){
     let message = ``;
     message += `👤 京东账号${$.index} ${$.nickName || $.UserName}\n`;
     if($.totalSuccess !== 0 && $.totalTry !== 0){
-        message += `🎉 本次申请成功：${$.totalSuccess}/${$.totalTry}个商品🛒\n`;
+        message += `🎉 本次提交申请：${$.totalSuccess}/${$.totalTry}个商品🛒\n`;
         message += `🎉 ${$.successNum}个商品待领取\n`;
         message += `🗑 ${$.giveupNum}个商品已放弃\n`;
     } else {
