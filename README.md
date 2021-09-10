@@ -11,6 +11,10 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-10 12:20 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+更加精确识别出 申请成功但未领取 申请成功已领取 申请已完成 已放弃 的类型
+```
 - 2021-09-09 21:34 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 增加了几个默认的关键词，用于屏蔽成人类商品
