@@ -1,6 +1,6 @@
 /*
  * 由ZCY01二次修改：脚本默认不运行
- * 由 X1a0He 修复：依然保持脚本默认不运行
+ * 由 X1a0He 修复
  * 如需运行请自行添加环境变量：JD_TRY，值填 true 即可运行
  * 脚本兼容: Node.js
  * X1a0He留
@@ -10,7 +10,6 @@
  * 请提前取关至少250个商店确保京东试用脚本正常运行
  *
  * @Address: https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js
- * @LastEditTime: 2021-09-09 21:34:00
  * @LastEditors: X1a0He
  */
 const $ = new Env('京东试用')
@@ -25,6 +24,8 @@ $.isForbidden = false;
 $.wrong = false;
 $.giveupNum = 0;
 $.successNum = 0;
+$.completeNum = 0;
+$.getNum = 0;
 $.try = true;
 //下面很重要，遇到问题请把下面注释看一遍再来问
 let args_xh = {
@@ -186,15 +187,17 @@ let args_xh = {
                 // await try_MyTrials(1, 1)    //申请中的商品
                 $.giveupNum = 0;
                 $.successNum = 0;
+                $.getNum = 0;
+                $.completeNum = 0;
                 await try_MyTrials(1, 2)    //申请成功的商品
                 // await try_MyTrials(1, 3)    //申请失败的商品
                 await showMsg()
             }
         }
     }
-    if($.isForbidden === false && $.isLimit === false){
-        await $.notify.sendNotify(`${$.name}`, notifyMsg);
-    }
+    // if($.isForbidden === false && $.isLimit === false){
+    //     await $.notify.sendNotify(`${$.name}`, notifyMsg);
+    // }
     // } else {
     //     console.log(`\n您未设置运行【京东试用】脚本，结束运行！\n`)
     // }
@@ -402,7 +405,7 @@ function try_feedsList(tabId, page){
 
 function try_apply(title, activityId){
     return new Promise((resolve, reject) => {
-        console.log(`申请试用商品中...`)
+        console.log(`申请试用商品提交中...`)
         args_xh.printLog ? console.log(`商品：${title}`) : ''
         args_xh.printLog ? console.log(`id为：${activityId}`) : ''
         const body = JSON.stringify({
@@ -424,7 +427,7 @@ function try_apply(title, activityId){
                     $.totalTry++
                     data = JSON.parse(data)
                     if(data.success && data.code === "1"){  // 申请成功
-                        console.log(data.message)
+                        console.log("申请提交成功")
                         $.totalSuccess++
                     } else if(data.code === "-106"){
                         console.log(data.message)   // 未在申请时间内！
@@ -484,9 +487,11 @@ function try_MyTrials(page, selected){
                             if(data.success && data.data){
                                 for(let item of data.data.list){
                                     item.status === 4 || item.text.text.includes('已放弃') ? $.giveupNum += 1 : ''
-                                    item.text.text.includes('试用资格将保留') ? $.successNum += 1 : ''
+                                    item.status === 2 && item.text.text.includes('试用资格将保留') ? $.successNum += 1 : ''
+                                    item.status === 2 && item.text.text.includes('请收货后尽快提交报告') ? $.getNum += 1 : ''
+                                    item.status === 2 && item.text.text.includes('试用已完成') ? $.completeNum += 1 : ''
                                 }
-                                console.log(`待领取 | 已放弃：${$.successNum} | ${$.giveupNum}`)
+                                console.log(`待领取 | 已领取 | 已完成 | 已放弃：${$.successNum} | ${$.getNum} | ${$.completeNum} | ${$.giveupNum}`)
                             } else {
                                 console.log(`获得成功列表失败: ${data.message}`)
                             }
@@ -525,11 +530,15 @@ async function showMsg(){
     if($.totalSuccess !== 0 && $.totalTry !== 0){
         message += `🎉 本次提交申请：${$.totalSuccess}/${$.totalTry}个商品🛒\n`;
         message += `🎉 ${$.successNum}个商品待领取\n`;
-        message += `🗑 ${$.giveupNum}个商品已放弃\n`;
+        message += `🎉 ${$.getNum}个商品已领取\n`;
+        message += `🎉 ${$.completeNum}个商品已完成\n`;
+        message += `🗑 ${$.giveupNum}个商品已放弃\n\n`;
     } else {
         message += `⚠️ 本次执行没有申请试用商品\n`;
         message += `🎉 ${$.successNum}个商品待领取\n`;
-        message += `🗑 ${$.giveupNum}个商品已放弃\n`;
+        message += `🎉 ${$.getNum}个商品已领取\n`;
+        message += `🎉 ${$.completeNum}个商品已完成\n`;
+        message += `🗑 ${$.giveupNum}个商品已放弃\n\n`;
     }
     if(!args_xh.jdNotify || args_xh.jdNotify === 'false'){
         $.msg($.name, ``, message, {
