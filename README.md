@@ -12,6 +12,13 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-10 10:24 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+内置成人类用品，老人，幼儿，饲料的关键词，无论有无设置环境变量，内置关键词永远存在
+增加指定账号数量发送通知
+修复一旦遇到有上限账号或风控账号就不发通知的问题
+更详细的脚本注释
+```
 - 2021-09-12 09:09 Fix [jd_ljd_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_ljd_xh.js)
 ```
 修复死循环
@@ -81,7 +88,7 @@
  修复当maxLength过大的时候，会出现自动停止的问题
 ```
 # ToDo
-- [ ] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+- [x] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 内置成人类用品，老人，幼儿，饲料的关键词，无论有无设置环境变量，内置关键词永远存在
 增加指定账号数量发送通知
