@@ -21,6 +21,7 @@
 ```
 - 2021-09-12 09:09 Fix [jd_ljd_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_ljd_xh.js)
 ```
+领京豆脚本，有问题直接提issues
 修复死循环
 修复有部分任务不做的问题
 ```
