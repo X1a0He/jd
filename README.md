@@ -1,13 +1,14 @@
-# 由本人修复的京东类脚本，引用请注明来源
-支持且仅支持Node.js，青龙面板，我是测试过能跑才会放上来的
+# 由X1a0He修复，引用注明来源，使用前看下面
 
-没有拉库命令，自己找
+要是不看脚本注释就用我仓库的脚本，还来问我怎么用的，自己删脚本吧
 
-可能一天会commit几十次
+我写得很清楚了
 
-因为有空的话修得频繁，有时可能是着急了没想太多随便修修就commit的
+[修复日志](https://github.com/X1a0He/jd_scripts_fixed/blob/main/README.md#fixlog)
 
-设置了什么commit通知的关了吧，别监控这个库了
+[ToDo](https://github.com/X1a0He/jd_scripts_fixed/blob/main/README.md#todo)
+
+[更新日志](https://github.com/X1a0He/jd_scripts_fixed/blob/main/README.md#updatelog)
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
@@ -80,6 +81,12 @@
  修复当maxLength过大的时候，会出现自动停止的问题
 ```
 # ToDo
+- [ ] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+内置成人类用品，老人，幼儿，饲料的关键词，无论有无设置环境变量，内置关键词永远存在
+增加指定账号数量发送通知
+修复一旦遇到有上限账号或风控账号就不发通知的问题
+```
 - [x] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js) [#2](https://github.com/X1a0He/jd_scripts_fixed/issues/2) [#3](https://github.com/X1a0He/jd_scripts_fixed/issues/3)
 ```
 支持黑名单过滤关键词时 输出对应关键词
