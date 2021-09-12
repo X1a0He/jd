@@ -4,11 +4,11 @@
 
 我写得很清楚了
 
-[修复日志](https://github.com/X1a0He/jd_scripts_fixed/blob/main/README.md#fixlog)
+[修复日志](https://github.com/X1a0He/jd_scripts_fixed#fixlog)
 
-[ToDo](https://github.com/X1a0He/jd_scripts_fixed/blob/main/README.md#todo)
+[ToDo](https://github.com/X1a0He/jd_scripts_fixed#todo)
 
-[更新日志](https://github.com/X1a0He/jd_scripts_fixed/blob/main/README.md#updatelog)
+[更新日志](https://github.com/X1a0He/jd_scripts_fixed#updatelog)
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
