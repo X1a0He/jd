@@ -14,6 +14,10 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-13 11:32 Fix [jd_ljd_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_ljd_xh.js)
+```
+修复通知中 [本次执行] 所获取到的成长值计算错误的问题
+```
 - 2021-09-13 11:22 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 修复了因 cookiesArr 错误导致不发通知的问题
