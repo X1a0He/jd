@@ -19,6 +19,7 @@ $.isPush = true;
 $.isLimit = false;
 $.isForbidden = false;
 $.wrong = false;
+$.totalPages = 0;
 $.giveupNum = 0;
 $.successNum = 0;
 $.completeNum = 0;
@@ -189,7 +190,16 @@ let args_xh = {
                         console.log(`tabId组已遍历完毕，不在获取商品\n`);
                         break;
                     } else {
-                        await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage++)  //获取对应tabId的试用页面
+                        if($.nowPage > $.totalPages){
+                            console.log("请求页数错误")
+                            $.wrong = true;
+                            break;
+                        } else if($.nowTabIdIndex > args_xh.tabId.length){
+                            console.log(`不再获取商品，边缘越界，提交试用中...`)
+                            break;
+                        }
+                        await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage)  //获取对应tabId的试用页面
+                        $.nowPage !== $.totalPages ? $.nowPage++ : $.nowPage = 1
                     }
                     if(trialActivityIdList.length < args_xh.maxLength){
                         console.log(`间隔等待中，请等待 2 秒\n`)
@@ -226,8 +236,8 @@ let args_xh = {
                 console.log(`正在进行第 ${$.sentNum} 次发送通知，发送数量：${args_xh.sendNum}`)
                 await notify.sendNotify(`${$.name}`, `${notifyMsg}`)
                 notifyMsg = "";
-            } else if((cookiesArr.length - ($.sentNum * args_xh.sendNum)) < args_xh.sendNum){
-                console.log(`正在进行最后一次发送通知，发送数量：${(cookiesArr.length - ($.sentNum * args_xh.sendNum))}`)
+            } else if(($.cookiesArr.length - ($.sentNum * args_xh.sendNum)) < args_xh.sendNum){
+                console.log(`正在进行最后一次发送通知，发送数量：${($.cookiesArr.length - ($.sentNum * args_xh.sendNum))}`)
                 await notify.sendNotify(`${$.name}`, `${notifyMsg}`)
                 notifyMsg = "";
             }
@@ -320,14 +330,6 @@ function try_tabList(){
 //获取商品列表并且过滤 By X1a0He
 function try_feedsList(tabId, page){
     return new Promise((resolve, reject) => {
-        if(page > $.totalPages){
-            console.log("请求页数错误")
-            $.wrong = true;
-            return;
-        } else if($.nowTabIdIndex > args_xh.tabId.length){
-            console.log(`不再获取商品，边缘越界，提交试用中...`)
-            return;
-        }
         const body = JSON.stringify({
             "tabId": `${tabId}`,
             "page": page,
