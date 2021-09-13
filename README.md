@@ -14,6 +14,11 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-13 11:22 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+修复了因 cookiesArr 错误导致不发通知的问题
+可能修复了请求页数错误后直接停止不运行的问题
+```
 - 2021-09-10 10:24 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 内置成人类用品，老人，幼儿，饲料的关键词，无论有无设置环境变量，内置关键词永远存在
