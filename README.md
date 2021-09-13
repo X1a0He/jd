@@ -14,6 +14,12 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-13 14:15 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+修复上次修改出现逻辑错误导致无法运行的问题
+修复 notify 错误导致不发通知的问题
+修复请求页数自增逻辑导致显示请求页数错误的问题
+```
 - 2021-09-13 11:32 Fix [jd_ljd_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_ljd_xh.js)
 ```
 修复通知中 [本次执行] 所获取到的成长值计算错误的问题
