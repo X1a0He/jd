@@ -82,7 +82,6 @@ async function main(){
                 }
             }
         } while($.taskInfos.length !== 0);
-        message += `[本次执行] 获得成长值：${$.addedGrowth}\n`
         // 从京东首页领京豆进入
         if(!$.viewAppHome){
             console.log(`[从京东首页领京豆进入] 正在做任务...`)
@@ -92,6 +91,7 @@ async function main(){
                 await taskRequest("beanHomeIconDoTask", `{"flag":"1","viewChannel":"AppHome"}`)
             }
         }
+        message += `[本次执行] 获得成长值：${$.addedGrowth}\n`
     }
 }
 
@@ -133,8 +133,8 @@ function taskRequest(functionId, body){
                                 break;
                             case "beanHomeIconDoTask":
                                 if(typeof data.errorCode === "undefined"){
-                                    console.log(`${data.data.remindMsg}\n`)
                                     $.addedGrowth += 50;
+                                    console.log(`${data.data.remindMsg}\n`)
                                 } else console.log(`${data.errorMessage}`)
                         }
                     }
