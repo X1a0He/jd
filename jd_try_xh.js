@@ -190,6 +190,7 @@ let args_xh = {
                         console.log(`tabId组已遍历完毕，不在获取商品\n`);
                         break;
                     } else {
+                        $.totalPages = 1;
                         if($.nowPage > $.totalPages){
                             console.log("请求页数错误")
                             $.wrong = true;
