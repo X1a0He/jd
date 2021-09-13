@@ -61,7 +61,7 @@ let args_xh = {
      * 可设置环境变量：JD_TRY_TABID，用@进行分隔
      * 默认为 1 到 5
      * */
-    tabId: process.env.JD_TRY_TABID && process.env.JD_TRY_TABID.split('@').map(Number) || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    tabId: process.env.JD_TRY_TABID && process.env.JD_TRY_TABID.split('@').map(Number) || [1],
     /*
      * 试用商品标题过滤，黑名单，当标题存在关键词时，则不加入试用组
      * 当白名单和黑名单共存时，黑名单会自动失效，优先匹配白名单，匹配完白名单后不会再匹配黑名单，望周知
@@ -145,7 +145,7 @@ let args_xh = {
     console.log('X1a0He留：遇到问题请把脚本内的注释看一遍再来问，谢谢')
     console.log('X1a0He留：遇到问题请把脚本内的注释看一遍再来问，谢谢')
     console.log('X1a0He留：遇到问题请把脚本内的注释看一遍再来问，谢谢')
-    // await $.wait(500)
+    await $.wait(500)
     // 如果你要运行京东试用这个脚本，麻烦你把环境变量 JD_TRY 设置为 true
     if(process.env.JD_TRY && process.env.JD_TRY === 'true'){
         await requireConfig()
@@ -185,22 +185,12 @@ let args_xh = {
                 $.isForbidden = false
                 $.wrong = false
                 size = 1
-                while(trialActivityIdList.length < args_xh.maxLength && $.isForbidden === false && $.wrong === false){
+                while(trialActivityIdList.length < args_xh.maxLength && $.isForbidden === false){
                     if($.nowTabIdIndex === args_xh.tabId.length){
                         console.log(`tabId组已遍历完毕，不在获取商品\n`);
                         break;
                     } else {
-                        $.totalPages = 1;
-                        if($.nowPage > $.totalPages){
-                            console.log("请求页数错误")
-                            $.wrong = true;
-                            break;
-                        } else if($.nowTabIdIndex > args_xh.tabId.length){
-                            console.log(`不再获取商品，边缘越界，提交试用中...`)
-                            break;
-                        }
                         await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage)  //获取对应tabId的试用页面
-                        $.nowPage !== $.totalPages ? $.nowPage++ : $.nowPage = 1
                     }
                     if(trialActivityIdList.length < args_xh.maxLength){
                         console.log(`间隔等待中，请等待 2 秒\n`)
@@ -235,11 +225,11 @@ let args_xh = {
             if($.index % args_xh.sendNum === 0){
                 $.sentNum++;
                 console.log(`正在进行第 ${$.sentNum} 次发送通知，发送数量：${args_xh.sendNum}`)
-                await notify.sendNotify(`${$.name}`, `${notifyMsg}`)
+                await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
                 notifyMsg = "";
             } else if(($.cookiesArr.length - ($.sentNum * args_xh.sendNum)) < args_xh.sendNum){
                 console.log(`正在进行最后一次发送通知，发送数量：${($.cookiesArr.length - ($.sentNum * args_xh.sendNum))}`)
-                await notify.sendNotify(`${$.name}`, `${notifyMsg}`)
+                await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
                 notifyMsg = "";
             }
         }
@@ -352,11 +342,8 @@ function try_feedsList(tabId, page){
                     let tempKeyword = ``;
                     if(data.success){
                         $.totalPages = data.data.pages
-                        if($.nowTabIdIndex > args_xh.tabId.length){
-                            console.log(`不再获取商品，边缘越界，提交试用中...`)
-                        } else {
-                            console.log(`第 ${size++} 次获取试用商品成功，tabId:${args_xh.tabId[$.nowTabIdIndex]} 的 第 ${page}/${$.totalPages} 页`)
-                        }
+                        $.nowPage === $.totalPages ? $.nowPage = 1 : $.nowPage++;
+                        console.log(`第 ${size++} 次获取试用商品成功，tabId:${args_xh.tabId[$.nowTabIdIndex]} 的 第 ${page}/${$.totalPages} 页`)
                         console.log(`获取到商品 ${data.data.feedList.length} 条`)
                         for(let item of data.data.feedList){
                             if(item.applyNum === null){
