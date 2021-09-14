@@ -14,6 +14,11 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-14 23:02 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+修复当环境变量 JD_TRY_SENDNUM 大于已有账号数会发送多条通知的问题
+修复设定了环境变量 JD_TRY_SENDNUM 但不生效的问题
+```
 - 2021-09-14 22:57 Fix [jd_bean_change_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
 ```
 修复当环境变量 JD_BEAN_CHANGE_SENDNUM 大于已有账号数会发送多条通知的问题
