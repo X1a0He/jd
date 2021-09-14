@@ -106,7 +106,7 @@
  修复当maxLength过大的时候，会出现自动停止的问题
 ```
 # ToDo
-- [ ] About [jd_bean_change.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change.js)
+- [ ] About [jd_bean_change.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
 ```
 尝试修复 京豆昨日收支统计错误的问题
 ```
