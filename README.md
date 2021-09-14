@@ -14,6 +14,10 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-09-14 22:57 Fix [jd_bean_change_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
+```
+修复当环境变量 JD_BEAN_CHANGE_SENDNUM 大于已有账号数会发送多条通知的问题
+```
 - 2021-09-13 14:15 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 修复上次修改出现逻辑错误导致无法运行的问题
@@ -106,9 +110,9 @@
  修复当maxLength过大的时候，会出现自动停止的问题
 ```
 # ToDo
-- [ ] About [jd_bean_change.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
+- [x] About [jd_bean_change.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change_xh.js)
 ```
-尝试修复 京豆昨日收支统计错误的问题
+尝试修复 京豆昨日收支统计错误的问题(好像又没有问题)
 ```
 - [x] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
