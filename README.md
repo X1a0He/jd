@@ -106,6 +106,10 @@
  修复当maxLength过大的时候，会出现自动停止的问题
 ```
 # ToDo
+- [ ] About [jd_bean_change.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_bean_change.js)
+```
+尝试修复 京豆昨日收支统计错误的问题
+```
 - [x] About [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 内置成人类用品，老人，幼儿，饲料的关键词，无论有无设置环境变量，内置关键词永远存在
