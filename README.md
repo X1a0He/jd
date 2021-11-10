@@ -14,6 +14,11 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-11-10 22:30 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
+```
+新增JD_UNSUB_FAILTIMES环境变量，用于控制失败次数，防止死循环
+如果无效，带上你的日志tg找我
+```
 - 2021-09-14 23:02 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 修复当环境变量 JD_TRY_SENDNUM 大于已有账号数会发送多条通知的问题
