@@ -14,8 +14,9 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
-- 2021-11-10 22:30 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
+- 2021-11-11 13:16 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
 ```
+昨天上传那个忘记加break了，这个加回来了
 新增JD_UNSUB_FAILTIMES环境变量，用于控制失败次数，防止死循环
 如果无效，带上你的日志tg找我
 ```
