@@ -245,7 +245,6 @@ function favCommBatchDel(){
         const option = {
             url: `https://wq.jd.com/fav/comm/FavCommBatchDel?commId=${$.commIdList}&sceneval=2&g_login_type=1`,
             headers: {
-                "Connection": "keep-alive",
                 "Cookie": cookie,
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
                 "Referer": "https://wqs.jd.com/"
