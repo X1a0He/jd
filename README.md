@@ -1,3 +1,4 @@
+# 佛系修复，用爱发电
 # 由X1a0He修复，引用注明来源，使用前看下面
 
 要是不看脚本注释就用我仓库的脚本，还来问我怎么用的，自己删脚本吧
@@ -14,6 +15,10 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2021-12-26 15:00 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
+```
+修复了获取数据失败的问题
+```
 - 2021-11-11 13:16 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
 ```
 昨天上传那个忘记加break了，这个加回来了
