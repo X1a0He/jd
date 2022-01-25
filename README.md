@@ -15,6 +15,13 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2022-01-25 15:42 Fix [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+新增环境变量 JD_TRY_TOTALPAGES 用于指定每页遍历的最大页数
+新增环境变量 JD_TRY_UNIFIED 用于指定是否采用统一试用组，详情请看脚本 args_xh 下的注释
+修复了获取tabList失败的问题
+修复了无法获取试用申请成功的问题
+```
 - 2021-12-26 15:00 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
 ```
 修复了获取数据失败的问题
