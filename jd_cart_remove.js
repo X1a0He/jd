@@ -90,7 +90,8 @@ function getCart_xh(){
         }
         $.get(option, async(err, resp, data) => {
             try{
-                data = JSON.parse(getSubstr(data, "window.cartData = ", "window._PFM_TIMING"));
+                let content = getSubstr(data, "window.cartData = ", "window._PFM_TIMING").replace(/\s*/g,"");
+                data = JSON.parse(content);
                 $.areaId = data.areaId;   // locationId的传值
                 $.traceId = data.traceId; // traceid的传值
                 venderCart = data.cart.venderCart;
