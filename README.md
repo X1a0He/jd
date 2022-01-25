@@ -15,6 +15,11 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2022-01-25 16:05 Fix [jd_cart_remove.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_cart_remove.js)
+```
+修复了获取购物车失败的问题
+修复了删除购物车数据失败的问题
+```
 - 2022-01-25 16:05 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
 ```
 修复了获取数据失败的问题
