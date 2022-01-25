@@ -198,57 +198,57 @@ let args_xh = {
                 $.isForbidden = false
                 $.wrong = false
                 size = 1
-                // while(trialActivityIdList.length < args_xh.maxLength && $.isForbidden === false){
-                //     if($.nowTabIdIndex === args_xh.tabId.length){
-                //         console.log(`tabId组已遍历完毕，不在获取商品\n`);
-                //         break;
-                //     } else {
-                //         await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage)  //获取对应tabId的试用页面
-                //     }
-                //     if(trialActivityIdList.length < args_xh.maxLength){
-                //         console.log(`间隔等待中，请等待 3 秒\n`)
-                //         await $.wait(3000);
-                //     }
-                // }
+                while(trialActivityIdList.length < args_xh.maxLength && $.isForbidden === false){
+                    if($.nowTabIdIndex === args_xh.tabId.length){
+                        console.log(`tabId组已遍历完毕，不在获取商品\n`);
+                        break;
+                    } else {
+                        await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage)  //获取对应tabId的试用页面
+                    }
+                    if(trialActivityIdList.length < args_xh.maxLength){
+                        console.log(`间隔等待中，请等待 3 秒\n`)
+                        await $.wait(3000);
+                    }
+                }
                 if ($.isForbidden === false && $.isLimit === false) {
-                    // console.log(`稍后将执行试用申请，请等待 2 秒\n`)
-                    // await $.wait(2000);
-                    // for(let i = 0; i < trialActivityIdList.length && $.isLimit === false; i++){
-                    //     if($.isLimit){
-                    //         console.log("试用上限")
-                    //         break
-                    //     }
-                    //     await try_apply(trialActivityTitleList[i], trialActivityIdList[i])
-                    //     console.log(`间隔等待中，请等待 ${args_xh.applyInterval} ms\n`)
-                    //     await $.wait(args_xh.applyInterval);
-                    // }
+                    console.log(`稍后将执行试用申请，请等待 2 秒\n`)
+                    await $.wait(2000);
+                    for(let i = 0; i < trialActivityIdList.length && $.isLimit === false; i++){
+                        if($.isLimit){
+                            console.log("试用上限")
+                            break
+                        }
+                        await try_apply(trialActivityTitleList[i], trialActivityIdList[i])
+                        console.log(`间隔等待中，请等待 ${args_xh.applyInterval} ms\n`)
+                        await $.wait(args_xh.applyInterval);
+                    }
                     console.log("试用申请执行完毕...")
                     // await try_MyTrials(1, 1)    //申请中的商品
                     $.giveupNum = 0;
                     $.successNum = 0;
                     $.getNum = 0;
                     $.completeNum = 0;
-                    await try_MyTrials(1, 1)    //申请成功的商品
+                    await try_MyTrials(1, 2)    //申请成功的商品
                     // await try_MyTrials(1, 3)    //申请失败的商品
-                    // await showMsg()
+                    await showMsg()
                 }
             }
-            // if($.isNode()){
-            //     if($.index % args_xh.sendNum === 0){
-            //         $.sentNum++;
-            //         console.log(`正在进行第 ${$.sentNum} 次发送通知，发送数量：${args_xh.sendNum}`)
-            //         await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
-            //         notifyMsg = "";
-            //     }
-            // }
+            if($.isNode()){
+                if($.index % args_xh.sendNum === 0){
+                    $.sentNum++;
+                    console.log(`正在进行第 ${$.sentNum} 次发送通知，发送数量：${args_xh.sendNum}`)
+                    await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
+                    notifyMsg = "";
+                }
+            }
         }
-        // if($.isNode()){
-        //     if(($.cookiesArr.length - ($.sentNum * args_xh.sendNum)) < args_xh.sendNum){
-        //         console.log(`正在进行最后一次发送通知，发送数量：${($.cookiesArr.length - ($.sentNum * args_xh.sendNum))}`)
-        //         await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
-        //         notifyMsg = "";
-        //     }
-        // }
+        if($.isNode()){
+            if(($.cookiesArr.length - ($.sentNum * args_xh.sendNum)) < args_xh.sendNum){
+                console.log(`正在进行最后一次发送通知，发送数量：${($.cookiesArr.length - ($.sentNum * args_xh.sendNum))}`)
+                await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
+                notifyMsg = "";
+            }
+        }
     } else {
         console.log(`\n您未设置运行【京东试用】脚本，结束运行！\n`)
     }
@@ -536,7 +536,6 @@ function try_MyTrials(page, selected) {
                 if (err) {
                     console.log(`🚫 ${arguments.callee.name.toString()} API请求失败，请检查网路\n${JSON.stringify(err)}`)
                 } else {
-                    console.log(data)
                     data = JSON.parse(data)
                     if (data.success) {
                         //temp adjustment
