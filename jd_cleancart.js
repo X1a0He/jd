@@ -91,7 +91,7 @@ if ($.isNode()) {
                             break;
                         }
                     } else break;
-                } while (!$.error || $.keywordsNum !== $.beforeRemove)
+                } while (!$.error && $.keywordsNum !== $.beforeRemove)
             }
         }
     } else {
