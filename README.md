@@ -14,7 +14,7 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog & Updatelog
-- 2022-01-25 16:05 Fix [jd_cleancart.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_cleancart.js)
+- 2022-01-29 22:50 Update [jd_cleancart.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_cleancart.js)
 ```
 新增环境变量 XH_CLEAN_EXCEPT 以控制跳过某个指定账号
 修改环境变量 JD_CART_REMOVESIZE -> XH_CLEAN_REMOVESIZE
