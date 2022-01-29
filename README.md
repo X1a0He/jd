@@ -1,11 +1,12 @@
+# 注意：本仓库不支持单拉
 # 佛系修复，用爱发电
 # 由X1a0He修复，引用注明来源，使用前看下面
 
-要是不看脚本注释就用我仓库的脚本，还来问我怎么用的，自己删脚本吧
+问的时候请带上日志截图+你遇到的问题
 
-针对与 京东试用脚本 如果再有傻逼来一直问，我直接扬库跑路
+不看脚本就直接跑，且来问的，请删脚本
 
-我写得很清楚了
+针对 京东试用脚本 请先看完脚本注释再来问，我写得很清楚了
 
 [修复日志](https://github.com/X1a0He/jd_scripts_fixed#fixlog)
 
@@ -15,6 +16,11 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog
+- 2022-01-29 16:45 Fix [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
+```
+再次修复了获取数据失败的问题
+再次修复了取消关注或取消收藏失败的问题
+```
 - 2022-01-25 16:05 Fix [jd_cart_remove.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_cart_remove.js)
 ```
 修复了获取购物车失败的问题
