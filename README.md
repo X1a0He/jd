@@ -8,7 +8,7 @@
 
 针对 京东试用脚本 请先看完脚本注释再来问，我写得很清楚了
 
-[修复日志 和 更新日志](https://github.com/X1a0He/jd_scripts_fixed#fixlog)
+[修复日志 和 更新日志](https://github.com/X1a0He/jd_scripts_fixed#fixlog--updatelog)
 
 [ToDo](https://github.com/X1a0He/jd_scripts_fixed#todo)
 
