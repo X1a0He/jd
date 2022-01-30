@@ -14,7 +14,11 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog & Updatelog
-- 2022-01-29 22:50 Update [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
+- 2022-01-30 14:15 Update [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+新增环境变量 XH_TRY_EXCEPT 以控制跳过某个指定账号
+```
+- 2022-01-30 14:10 Update [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
 ```
 新增环境变量 XH_UNSUB_EXCEPT 以控制跳过某个指定账号
 修改了部分地方写错注释的问题
