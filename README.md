@@ -14,6 +14,10 @@
 
 ## Contact：[X1a0He](https://t.me/X1a0He) (需要科学上网)
 # Fixlog & Updatelog
+- 2022-02-03 15:55 Update [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
+```
+当统一试用组启用时，无论是否已满，第二个账号开始均不会进行试用组的再次添加
+```
 - 2022-01-30 14:15 Update [jd_try_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js)
 ```
 新增环境变量 XH_TRY_EXCEPT 以控制跳过某个指定账号
