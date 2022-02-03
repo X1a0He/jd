@@ -218,6 +218,7 @@ let args_xh = {
                 $.wrong = false
                 size = 1
                 while(trialActivityIdList.length < args_xh.maxLength && $.isForbidden === false){
+                    if(args_xh.unified && trialActivityIdList.length !== 0) break;
                     if($.nowTabIdIndex === args_xh.tabId.length){
                         console.log(`tabId组已遍历完毕，不在获取商品\n`);
                         break;
