@@ -1,5 +1,9 @@
 # 免责声明：仓库内所有文件仅供学习使用，请在24小时后删除
 # Fixlog & Updatelog
+- 2022-05-25 20:20 Update [jd_cleancart.js](https://github.com/X1a0He/jd/blob/main/jd_cleancart.js)
+```
+测试了一下，青龙能跑，我自己的号也能跑，部分号出现JSON问题，佛系修
+```
 - 2022-02-11 02:10 Update [jd_unsubscribe_xh.js](https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_unsubscribe_xh.js)
 ```
 增加401 Authorization Required的检测，当遇到此问题时，将不再进行json数据解析
