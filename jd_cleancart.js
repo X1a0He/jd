@@ -204,13 +204,6 @@ function removeCart() {
     })
 }
 
-function getSubstr(str, leftStr, rightStr) {
-    let left = str.indexOf(leftStr);
-    let right = str.indexOf(rightStr, left);
-    if (left < 0 || right < left) return '';
-    return str.substring(left + leftStr.length, right);
-}
-
 function TotalBean() {
     return new Promise(async resolve => {
         const options = {
